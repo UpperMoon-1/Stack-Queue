@@ -1,0 +1,43 @@
+queue 
+void enqueue(QUEUE *qp, NODE *np) { //insert to the end
+// your code
+	if (qp->front == NULL) { //the queue is empty
+		qp->length++;
+		qp->front = np;
+		qp->rear = np;
+	} else {
+		qp->length++;
+		NODE *hol = qp->rear;
+		hol->next = np;
+		qp->rear = np;
+	}
+
+}
+
+NODE* dequeue(QUEUE *qp) { //remove the front
+// your code
+
+	if (qp->length == 1) { //only one element in the queue
+		qp->length--;
+		NODE *r = qp->front;
+		qp->front = NULL;
+		qp->rear = NULL;
+		return r;
+
+	} else { //more than 1 element in the queue
+		qp->length--;
+		NODE *r = qp->front;
+		qp->front = r->next;
+		r->next = NULL;
+		return r;
+	}
+
+}
+
+void clean_queue(QUEUE *qp) {
+	clean(&(qp->front));
+	qp->front = NULL;
+	qp->rear = NULL;
+	qp->length = 0;
+}
+-----------------------------------
